@@ -6,10 +6,13 @@ public class IndicatorController : MonoBehaviour
 {
 
     public Transform dialPos;
+    public Transform secondDialPos;
     public Transform ringPos;
     public GameObject Green;
     public GameObject Yellow;
     public GameObject Red;
+    public int GreenSegments;
+    public int YellowSegments;
 
     // Start is called before the first frame update
     void Start()
@@ -20,16 +23,16 @@ public class IndicatorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dialPos.eulerAngles.y > 90 && dialPos.eulerAngles.y < 270)
-        transform.localEulerAngles = new Vector3(0, (dialPos.eulerAngles.y), 0);
+        if(dialPos.localEulerAngles.y > 90 && dialPos.localEulerAngles.y < 270)
+        transform.localEulerAngles = new Vector3(0, (dialPos.localEulerAngles.y + secondDialPos.localEulerAngles.y)/2, 0);
 
-        if(Mathf.Abs(transform.localEulerAngles.y - ringPos.eulerAngles.z) < 54)
+        if(Mathf.Abs(transform.localEulerAngles.y - ringPos.eulerAngles.z) < (18 * GreenSegments))
         {
             Green.SetActive(true);
             Yellow.SetActive(false);
             Red.SetActive(false);
         }
-        else if(Mathf.Abs(transform.localEulerAngles.y - ringPos.eulerAngles.z) > 54 && Mathf.Abs(transform.localEulerAngles.y - ringPos.eulerAngles.z) < 72)
+        else if(Mathf.Abs(transform.localEulerAngles.y - ringPos.eulerAngles.z) > (18 * GreenSegments) && Mathf.Abs(transform.localEulerAngles.y - ringPos.eulerAngles.z) < (18 * (GreenSegments + YellowSegments)))
         {
             Green.SetActive(false);
             Yellow.SetActive(true);
