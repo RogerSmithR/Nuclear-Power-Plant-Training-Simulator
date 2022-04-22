@@ -37,7 +37,7 @@ public class InformationScript : MonoBehaviour
     public void displayingNextInfo()
     {
         infoCounter++;
-
+        Debug.Log("Here");
         if (infoCounter == 1)
         {
             nextbuttonGameObject.SetActive(true);
