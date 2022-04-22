@@ -21,6 +21,9 @@ public class InformationScript : MonoBehaviour
     public GameObject displayLabelGameObject;
     public GameObject nextbuttonGameObject;
     public GameObject previousbuttonGameObject;
+
+    //This is to enable or disable the ray interactor on the right hand controller when the menu is opened or closed -Jackson
+    public GameObject interactRay;
     int infoCounter = 0;
     // Start is called before the first frame update
     void Start()
@@ -105,20 +108,24 @@ public class InformationScript : MonoBehaviour
     public void closeCanvas()
     {
         infoCanvasGameObject.SetActive(false);
+        interactRay.SetActive(false);
     }
 
     public void ooenCanvas()
     {
         infoCanvasGameObject.SetActive(true);
+        interactRay.SetActive(true);
     }
 
     public void whenBookSelected()
     {
         infoCanvasGameObject.SetActive(true);
+        interactRay.SetActive(true);
     }
 
     public void whenBookDropped()
     {
         infoCanvasGameObject.SetActive(false);
+        interactRay.SetActive(false);
     }
 }
