@@ -13,6 +13,8 @@ public class IndicatorController : MonoBehaviour
     public GameObject Red;
     public int GreenSegments;
     public int YellowSegments;
+    public int offset;
+    public bool secondDial;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +25,13 @@ public class IndicatorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dialPos.localEulerAngles.y > 90 && dialPos.localEulerAngles.y < 270)
-        transform.localEulerAngles = new Vector3(0, (dialPos.localEulerAngles.y + secondDialPos.localEulerAngles.y)/2, 0);
+        //if(dialPos.localEulerAngles.y > 90 && dialPos.localEulerAngles.y < 270)
+        if(secondDial)
+        transform.localEulerAngles = new Vector3(0, offset + (dialPos.localEulerAngles.y - secondDialPos.localEulerAngles.y)/2, 0);
+        else
+        transform.localEulerAngles = new Vector3(0, offset + (dialPos.localEulerAngles.y), 0);
 
-        if(Mathf.Abs(transform.localEulerAngles.y - ringPos.eulerAngles.z) < (18 * GreenSegments))
+        if (Mathf.Abs(transform.localEulerAngles.y - ringPos.eulerAngles.z) < (18 * GreenSegments))
         {
             Green.SetActive(true);
             Yellow.SetActive(false);
